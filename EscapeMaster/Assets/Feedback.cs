@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿    using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -15,8 +15,11 @@ public class Feedback : NetworkBehaviour {
     private int[] _code;
     [SerializeField]
     private InputField _inputField;
+    [SerializeField]
+    private Transform _anchorInputField;
 
     private Identifier _identifier;
+    private bool _inputFieldMoved = false;
 
 
     // Use this for initialization
@@ -26,6 +29,11 @@ public class Feedback : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (_inputFieldMoved == false && _identifier._identifier == 2)
+        {
+            _inputField.transform.position = _anchorInputField.position;
+            _inputFieldMoved = true;
+        }
         if (!isLocalPlayer || _identifier._identifier != 2)
         {
             Debug.Log(_identifier._identifier);
